@@ -1,29 +1,38 @@
+using static OmniPowerAssignment.Sensor_Handler;
+
 namespace OmniPowerAssignment
 {
     public partial class Form1 : Form
     {
+        //enum object used for basic purposes
 
+        private SensorType SensorType;
+        //enum object used specifically for graphs
+        private SensorType GraphingSelector = SensorType.Temperature;
         int threshold=0;
 
         //creating object for Sensor_Handler which will be used to gather data from sensor
         private Sensor_Handler SensorHandler1 = new Sensor_Handler();
         //creating timer object to use for automatic refresh 
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        //create enum to use instead of just an int for better readability in the future
-        int Graphing_selector = 0;
+
 
         public Form1()
         {
             // form initialization
             InitializeComponent();
+
+            //initializing enum to use instead of random numbers.
+            GraphingSelector = SensorType.Temperature;
+
             //setting up x label for graph
             formsPlot1.Plot.XLabel("Time");
             formsPlot1.Plot.Title("Temperature Over Time");
             formsPlot1.Plot.YLabel("°C");
             formsPlot1.Refresh();
 
-            //every 1.5 seconds refresh and get new values
-            timer.Interval = 1500;
+            //every 2 seconds refresh and get new values
+            timer.Interval = 2000;
 
             //call updateUI each tick cycle 
             timer.Tick += UpdateUI;
@@ -43,14 +52,14 @@ namespace OmniPowerAssignment
             SensorHandler1.Update_Values();
 
             //changing text accordingly showing newest value received by sensor 
-            TempReading.Text = SensorHandler1.SensorDataHistory[0].Last().ToString();
-            HumidityReading.Text = SensorHandler1.SensorDataHistory[1].Last().ToString();
-            PressureReading.Text = SensorHandler1.SensorDataHistory[2].Last().ToString();
+            TempReading.Text = SensorHandler1.GetLatestValueAsString((int)SensorType.Temperature);
+            HumidityReading.Text = SensorHandler1.GetLatestValueAsString((int)SensorType.Humidity);
+            PressureReading.Text = SensorHandler1.GetLatestValueAsString((int)SensorType.Pressure);
 
 
             //setting up graph. 
-            double[] data = SensorHandler1.SensorDataHistory[Graphing_selector].ToArray();
-            double[] Time_stamp_Data = SensorHandler1.TimeStamp.ToArray();
+            double[] data = SensorHandler1.GetSensorHistory((int)GraphingSelector);
+            double[] Time_stamp_Data = SensorHandler1.TimeHistory();
 
 
             formsPlot1.Plot.Add.Scatter(Time_stamp_Data, data);
@@ -61,7 +70,7 @@ namespace OmniPowerAssignment
 
 
             //checking if threshold is passed. Will move the following to Sensor_handler
-            if (checkBox1.Checked && threshold< SensorHandler1.SensorDataHistory[Graphing_selector].Last())
+            if (checkBox1.Checked && SensorHandler1.ThresholdExceeded((int)GraphingSelector,threshold))
             {
                 threshold_Indicator.Text = "Warning: Threshold Value Passed";
                 threshold_Indicator.ForeColor = Color.Red;
@@ -76,10 +85,8 @@ namespace OmniPowerAssignment
         private void temperatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //clearing plot values, updating title, and changing variable being graphed
-            formsPlot1.Plot.Clear();
-            formsPlot1.Plot.Title("Temperature Over Time");
-            formsPlot1.Plot.YLabel("°C");
-            Graphing_selector = 0;
+            UpdateGraphTitle("Temperature Over Time", "C");
+            GraphingSelector = SensorType.Temperature;
             formsPlot1.Refresh();
 
 
@@ -88,10 +95,8 @@ namespace OmniPowerAssignment
         private void pressureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //clearing plot values, updating title, and changing variable being graphed
-            formsPlot1.Plot.Clear();
-            formsPlot1.Plot.Title("Pressure Over Time");
-            formsPlot1.Plot.YLabel("p");
-            Graphing_selector = 2;
+            UpdateGraphTitle("Pressure Over Time", "p");
+            GraphingSelector = SensorType.Pressure;
             formsPlot1.Refresh();
 
         }
@@ -99,15 +104,13 @@ namespace OmniPowerAssignment
         private void humidityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //clearing plot values, updating title, and changing variable being graphed
-            formsPlot1.Plot.Clear();
-            formsPlot1.Plot.Title("Humidity Over Time");
-            formsPlot1.Plot.YLabel("%");
-            Graphing_selector = 1;
+            UpdateGraphTitle("Humidity Over Time", "%");
+            GraphingSelector = SensorType.Humidity;
             formsPlot1.Refresh();
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void StartButtonToggler(object sender, EventArgs e)
         {
             //toggling state of gui each time button is clicked 
             if (timer.Enabled)
@@ -120,14 +123,34 @@ namespace OmniPowerAssignment
             {
                 timer.Start();
                 button1.Text = "Stop";
-                Status.Text = "Runing";
+                Status.Text = "Running";
 
             }
         }
 
         private void ThresholdValueChange (object sender, EventArgs e)
         {
-            threshold = int.Parse(ThresholdValue.Text);
+
+
+            //add guardlines to prevent user from typing text into box.. Debounce making message box to show twice-to fix later
+
+            if (int.TryParse(ThresholdValue.Text, out int value))
+            {
+                threshold = value;
+            }
+            else
+            {
+                ThresholdValue.Text = "";
+
+                MessageBox.Show("Please enter a valid number for the threshold!");
+            }
+        }
+        //helper method for easier graph setu
+        private void UpdateGraphTitle(string title, string yLabel)
+        {
+            formsPlot1.Plot.Clear();
+            formsPlot1.Plot.Title(title);
+            formsPlot1.Plot.YLabel(yLabel);
         }
 
     }

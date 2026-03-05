@@ -201,9 +201,9 @@
             // formsPlot1
             // 
             formsPlot1.DisplayScale = 1F;
-            formsPlot1.Location = new Point(21, 32);
+            formsPlot1.Location = new Point(21, 50);
             formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new Size(611, 296);
+            formsPlot1.Size = new Size(611, 278);
             formsPlot1.TabIndex = 7;
             // 
             // button1
@@ -214,7 +214,7 @@
             button1.TabIndex = 9;
             button1.Text = "Start";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += StartButtonToggler;
             // 
             // Status
             // 
@@ -227,7 +227,7 @@
             // threshold_Indicator
             // 
             threshold_Indicator.AutoSize = true;
-            threshold_Indicator.Location = new Point(660, 14);
+            threshold_Indicator.Location = new Point(42, 331);
             threshold_Indicator.Name = "threshold_Indicator";
             threshold_Indicator.Size = new Size(0, 15);
             threshold_Indicator.TabIndex = 9;
