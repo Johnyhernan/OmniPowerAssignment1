@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
+            Threshold = new Label();
             label3 = new Label();
             label2 = new Label();
             HumidityReading = new TextBox();
             PressureReading = new TextBox();
             TempReading = new TextBox();
             label1 = new Label();
+            ThresholdValue = new TextBox();
             Graph = new MenuStrip();
             graphToolStripMenuItem = new ToolStripMenuItem();
             temperatureToolStripMenuItem = new ToolStripMenuItem();
@@ -43,6 +45,8 @@
             formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             button1 = new Button();
             Status = new Label();
+            threshold_Indicator = new Label();
+            checkBox1 = new CheckBox();
             tableLayoutPanel1.SuspendLayout();
             Graph.SuspendLayout();
             SuspendLayout();
@@ -52,12 +56,14 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 48F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 52F));
+            tableLayoutPanel1.Controls.Add(Threshold, 0, 3);
             tableLayoutPanel1.Controls.Add(label3, 0, 2);
             tableLayoutPanel1.Controls.Add(label2, 0, 1);
             tableLayoutPanel1.Controls.Add(HumidityReading, 1, 1);
             tableLayoutPanel1.Controls.Add(PressureReading, 1, 2);
             tableLayoutPanel1.Controls.Add(TempReading, 1, 0);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(ThresholdValue, 1, 3);
             tableLayoutPanel1.Location = new Point(657, 67);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
@@ -67,6 +73,17 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
             tableLayoutPanel1.Size = new Size(200, 209);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // Threshold
+            // 
+            Threshold.AutoSize = true;
+            Threshold.Dock = DockStyle.Fill;
+            Threshold.Location = new Point(3, 165);
+            Threshold.Name = "Threshold";
+            Threshold.Size = new Size(90, 44);
+            Threshold.TabIndex = 7;
+            Threshold.Text = "Threshold";
+            Threshold.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -131,6 +148,16 @@
             label1.Text = "Temperature(C)";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // ThresholdValue
+            // 
+            ThresholdValue.Anchor = AnchorStyles.None;
+            ThresholdValue.BackColor = SystemColors.Window;
+            ThresholdValue.Location = new Point(101, 175);
+            ThresholdValue.Name = "ThresholdValue";
+            ThresholdValue.Size = new Size(94, 23);
+            ThresholdValue.TabIndex = 8;
+            ThresholdValue.TextChanged += ThresholdValueChange;
+            // 
             // Graph
             // 
             Graph.BackColor = SystemColors.ActiveBorder;
@@ -139,7 +166,7 @@
             Graph.Location = new Point(9, 5);
             Graph.Name = "Graph";
             Graph.RenderMode = ToolStripRenderMode.Professional;
-            Graph.Size = new Size(59, 24);
+            Graph.Size = new Size(110, 24);
             Graph.TabIndex = 7;
             Graph.Text = "menuStrip1";
             // 
@@ -147,8 +174,8 @@
             // 
             graphToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { temperatureToolStripMenuItem, pressureToolStripMenuItem, humidityToolStripMenuItem });
             graphToolStripMenuItem.Name = "graphToolStripMenuItem";
-            graphToolStripMenuItem.Size = new Size(51, 20);
-            graphToolStripMenuItem.Text = "Graph";
+            graphToolStripMenuItem.Size = new Size(102, 20);
+            graphToolStripMenuItem.Text = "Graph Selection";
             // 
             // temperatureToolStripMenuItem
             // 
@@ -181,7 +208,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(675, 305);
+            button1.Location = new Point(657, 305);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 9;
@@ -192,22 +219,41 @@
             // Status
             // 
             Status.AutoSize = true;
-            Status.Location = new Point(756, 309);
+            Status.Location = new Point(777, 14);
             Status.Name = "Status";
-            Status.Size = new Size(51, 15);
+            Status.Size = new Size(0, 15);
             Status.TabIndex = 10;
-            Status.Text = "Stopped";
+            // 
+            // threshold_Indicator
+            // 
+            threshold_Indicator.AutoSize = true;
+            threshold_Indicator.Location = new Point(660, 14);
+            threshold_Indicator.Name = "threshold_Indicator";
+            threshold_Indicator.Size = new Size(0, 15);
+            threshold_Indicator.TabIndex = 9;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(758, 309);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(114, 19);
+            checkBox1.TabIndex = 11;
+            checkBox1.Text = "Threshold Active";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(869, 374);
+            Controls.Add(checkBox1);
             Controls.Add(Status);
             Controls.Add(button1);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(formsPlot1);
             Controls.Add(Graph);
+            Controls.Add(threshold_Indicator);
             Name = "Form1";
             Text = "Form1";
             tableLayoutPanel1.ResumeLayout(false);
@@ -235,5 +281,9 @@
         private ToolStripMenuItem humidityToolStripMenuItem;
         private Button button1;
         private Label Status;
+        private Label Threshold;
+        private TextBox ThresholdValue;
+        private Label threshold_Indicator;
+        private CheckBox checkBox1;
     }
 }

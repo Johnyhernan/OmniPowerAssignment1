@@ -3,7 +3,7 @@ namespace OmniPowerAssignment
     public partial class Form1 : Form
     {
 
-
+        int threshold=0;
 
         //creating object for Sensor_Handler which will be used to gather data from sensor
         private Sensor_Handler SensorHandler1 = new Sensor_Handler();
@@ -18,7 +18,9 @@ namespace OmniPowerAssignment
             InitializeComponent();
             //setting up x label for graph
             formsPlot1.Plot.XLabel("Time");
-
+            formsPlot1.Plot.Title("Temperature Over Time");
+            formsPlot1.Plot.YLabel("°C");
+            formsPlot1.Refresh();
 
             //every 1.5 seconds refresh and get new values
             timer.Interval = 1500;
@@ -56,6 +58,19 @@ namespace OmniPowerAssignment
             formsPlot1.Plot.Axes.AutoScale();
             formsPlot1.Refresh();
 
+
+
+            //checking if threshold is passed. Will move the following to Sensor_handler
+            if (checkBox1.Checked && threshold< SensorHandler1.SensorDataHistory[Graphing_selector].Last())
+            {
+                threshold_Indicator.Text = "Warning: Threshold Value Passed";
+                threshold_Indicator.ForeColor = Color.Red;
+            }
+            else
+            {
+                threshold_Indicator.Text = "";
+
+            }
         }
 
         private void temperatureToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,5 +124,11 @@ namespace OmniPowerAssignment
 
             }
         }
+
+        private void ThresholdValueChange (object sender, EventArgs e)
+        {
+            threshold = int.Parse(ThresholdValue.Text);
+        }
+
     }
 }
