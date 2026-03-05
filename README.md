@@ -33,7 +33,8 @@ git clone https://github.com/Johnyhernan/OmniPowerAssignment1
 
 1. Go to **File > Open > Project/Solution**
 2. Select `OmniPowerAssignment.csproj`
-3. Build the solution, then run
+3. Build OmniPowerAssignment, then Build the solution
+4. Run
 
 ---
 
