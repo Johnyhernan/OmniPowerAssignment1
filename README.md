@@ -62,7 +62,7 @@ Represents a single sensor object.
 
  -Important  Functions
  
-   GetValueOfSensor: Retrives random value for sensor object
+    GetValueOfSensor: Retrives random value for sensor object
 
 ### `Sensor_Handler`
 Manages all sensor data and acts as the intermediary between the UI and sensor data, following the **MVVM** design pattern. Uses queues to track the latest values while automatically discarding the oldest entries.
