@@ -43,7 +43,7 @@ git clone https://github.com/Johnyhernan/OmniPowerAssignment1
 The GUI displays live monitoring data for three sensors: **Temperature**, **Humidity**, and **Pressure**.
 
 
- **Start**  Toggles data gathering on/off for all sensors 
+ **Start/off button**  Toggles data gathering on/off for all sensors 
  
  **Threshold Textbox**  Sets a numeric threshold. If the following checkbox is enabled a warning will appear if current value in graph exceeds threshold. Non-numeric input triggers a validation warning textbox.
  
