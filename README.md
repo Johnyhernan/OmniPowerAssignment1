@@ -43,7 +43,9 @@ The GUI displays live monitoring data for three sensors: **Temperature**, **Humi
 
 
  **Start**  Toggles data gathering on/off for all sensors 
+ 
  **Threshold Textbox**  Sets a numeric threshold. If the following checkbox is enabled a warning will appear if current value in graph exceeds threshold. Non-numeric input triggers a validation warning textbox.
+ 
  **Chart**  Displays a continuously updating value-vs-time graph for the sensor chosen in the dropdown. When the gui first starts temp-vs-time is chosen automatically.
 
 ---
