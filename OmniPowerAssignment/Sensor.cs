@@ -8,7 +8,7 @@ namespace OmniPowerAssignment
 {
     public class Sensor
     {
-
+        //object indicating name, units, and range of sensor
         String NameOfSensor;
         String Units;
         int rangeOf;

@@ -41,10 +41,10 @@
             pressureToolStripMenuItem = new ToolStripMenuItem();
             humidityToolStripMenuItem = new ToolStripMenuItem();
             formsPlot1 = new ScottPlot.WinForms.FormsPlot();
-            trackBar1 = new TrackBar();
+            button1 = new Button();
+            Status = new Label();
             tableLayoutPanel1.SuspendLayout();
             Graph.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -58,22 +58,21 @@
             tableLayoutPanel1.Controls.Add(PressureReading, 1, 2);
             tableLayoutPanel1.Controls.Add(TempReading, 1, 0);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
-            tableLayoutPanel1.Controls.Add(Graph, 1, 3);
-            tableLayoutPanel1.Location = new Point(657, 25);
+            tableLayoutPanel1.Location = new Point(657, 67);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
-            tableLayoutPanel1.Size = new Size(200, 251);
+            tableLayoutPanel1.Size = new Size(200, 209);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Dock = DockStyle.Fill;
-            label3.Location = new Point(3, 163);
+            label3.Location = new Point(3, 121);
             label3.Name = "label3";
             label3.Size = new Size(90, 44);
             label3.TabIndex = 6;
@@ -84,7 +83,7 @@
             // 
             label2.AutoSize = true;
             label2.Dock = DockStyle.Fill;
-            label2.Location = new Point(3, 103);
+            label2.Location = new Point(3, 61);
             label2.Name = "label2";
             label2.Size = new Size(90, 60);
             label2.TabIndex = 5;
@@ -95,7 +94,7 @@
             // 
             HumidityReading.Anchor = AnchorStyles.None;
             HumidityReading.BackColor = SystemColors.ControlLightLight;
-            HumidityReading.Location = new Point(101, 121);
+            HumidityReading.Location = new Point(101, 79);
             HumidityReading.Name = "HumidityReading";
             HumidityReading.ReadOnly = true;
             HumidityReading.Size = new Size(94, 23);
@@ -105,7 +104,7 @@
             // 
             PressureReading.Anchor = AnchorStyles.None;
             PressureReading.BackColor = SystemColors.Window;
-            PressureReading.Location = new Point(101, 173);
+            PressureReading.Location = new Point(101, 131);
             PressureReading.Name = "PressureReading";
             PressureReading.ReadOnly = true;
             PressureReading.Size = new Size(94, 23);
@@ -115,7 +114,7 @@
             // 
             TempReading.Anchor = AnchorStyles.None;
             TempReading.BackColor = SystemColors.ControlLightLight;
-            TempReading.Location = new Point(101, 40);
+            TempReading.Location = new Point(101, 19);
             TempReading.Name = "TempReading";
             TempReading.ReadOnly = true;
             TempReading.Size = new Size(94, 23);
@@ -127,17 +126,17 @@
             label1.Dock = DockStyle.Fill;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(90, 103);
+            label1.Size = new Size(90, 61);
             label1.TabIndex = 4;
             label1.Text = "Temperature(C)";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Graph
             // 
-            Graph.BackColor = SystemColors.ControlLightLight;
+            Graph.BackColor = SystemColors.ActiveBorder;
             Graph.Dock = DockStyle.None;
             Graph.Items.AddRange(new ToolStripItem[] { graphToolStripMenuItem });
-            Graph.Location = new Point(96, 207);
+            Graph.Location = new Point(9, 5);
             Graph.Name = "Graph";
             Graph.RenderMode = ToolStripRenderMode.Professional;
             Graph.Size = new Size(59, 24);
@@ -154,21 +153,21 @@
             // temperatureToolStripMenuItem
             // 
             temperatureToolStripMenuItem.Name = "temperatureToolStripMenuItem";
-            temperatureToolStripMenuItem.Size = new Size(180, 22);
+            temperatureToolStripMenuItem.Size = new Size(140, 22);
             temperatureToolStripMenuItem.Text = "Temperature";
             temperatureToolStripMenuItem.Click += temperatureToolStripMenuItem_Click;
             // 
             // pressureToolStripMenuItem
             // 
             pressureToolStripMenuItem.Name = "pressureToolStripMenuItem";
-            pressureToolStripMenuItem.Size = new Size(180, 22);
+            pressureToolStripMenuItem.Size = new Size(140, 22);
             pressureToolStripMenuItem.Text = "Pressure";
             pressureToolStripMenuItem.Click += pressureToolStripMenuItem_Click;
             // 
             // humidityToolStripMenuItem
             // 
             humidityToolStripMenuItem.Name = "humidityToolStripMenuItem";
-            humidityToolStripMenuItem.Size = new Size(180, 22);
+            humidityToolStripMenuItem.Size = new Size(140, 22);
             humidityToolStripMenuItem.Text = "Humidity";
             humidityToolStripMenuItem.Click += humidityToolStripMenuItem_Click;
             // 
@@ -180,28 +179,41 @@
             formsPlot1.Size = new Size(611, 296);
             formsPlot1.TabIndex = 7;
             // 
-            // trackBar1
+            // button1
             // 
-            trackBar1.Location = new Point(669, 283);
-            trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(183, 45);
-            trackBar1.TabIndex = 8;
+            button1.Location = new Point(675, 305);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 9;
+            button1.Text = "Start";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // Status
+            // 
+            Status.AutoSize = true;
+            Status.Location = new Point(756, 309);
+            Status.Name = "Status";
+            Status.Size = new Size(51, 15);
+            Status.TabIndex = 10;
+            Status.Text = "Stopped";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(869, 374);
-            Controls.Add(trackBar1);
+            Controls.Add(Status);
+            Controls.Add(button1);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(formsPlot1);
+            Controls.Add(Graph);
             Name = "Form1";
             Text = "Form1";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             Graph.ResumeLayout(false);
             Graph.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -221,6 +233,7 @@
         private ToolStripMenuItem temperatureToolStripMenuItem;
         private ToolStripMenuItem pressureToolStripMenuItem;
         private ToolStripMenuItem humidityToolStripMenuItem;
-        private TrackBar trackBar1;
+        private Button button1;
+        private Label Status;
     }
 }
