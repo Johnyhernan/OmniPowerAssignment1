@@ -10,6 +10,9 @@
 *.userosscache
 *.sln.docstates
 
+
+OmniPowerAssignment.sln
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
