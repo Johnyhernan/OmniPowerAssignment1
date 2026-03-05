@@ -60,8 +60,19 @@ Represents a single sensor object.
 **Units**  Specifies the unit of measurement 
 **RangeOf**  Defines the range used for data generation 
 
+ -Important  Functions
+   GetValueOfSensor: Retrives random value for sensor object
+
 ### `Sensor_Handler`
 Manages all sensor data and acts as the intermediary between the UI and sensor data, following the **MVVM** design pattern. Uses queues to track the latest values while automatically discarding the oldest entries.
+
+ -Important  Functions
+    Update_Values: Updates values for all sensors.
+    ThresholdExceeded: Returns  true if current value displayed in chart exceeds threshold
+    GetSensorHistory: Returns an array of all the values in the queue for the specific sensor
+    TimeHistory: Returns an array of all the time values in the queue 
+    GetLatestValueAsString: Returns string of latest value of specified Sensor 
+    
 
 ## Architecture
     |Sensor| <-> |Sensor_Handler| <-> |UI|
